@@ -1,0 +1,28 @@
+<h1>Listing Url</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @feed_sources.each do |feed_source| %>
+      <tr>
+        <td><%= feed_source.title %></td>
+        <td><%= feed_source.url %></td>
+        <td><%= link_to 'Show', feed_source %></td>
+        <td><%= link_to 'Edit', edit_feed_source_path(feed_source) %></td>
+        <td><%= link_to 'Destroy', feed_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New feed_source', new_feed_source_path %>
