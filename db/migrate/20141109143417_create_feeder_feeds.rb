@@ -3,9 +3,9 @@ class CreateFeederFeeds < ActiveRecord::Migration
     create_table :feeder_feeds do |t|
       t.string :title,    null: false
       t.text   :content,  null: false
-      t.string :url,      null: false
-      t.text   :analyzed, null: false
-      t.string :language
+      t.string :url
+      t.boolean :analyzed, default: false
+      t.string :language, default: false
 
       t.timestamps
     end

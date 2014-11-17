@@ -11,21 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109143417) do
+ActiveRecord::Schema.define(version: 20141109124651) do
 
   create_table "feeder_feed_sources", force: true do |t|
     t.string   "title"
     t.string   "url",        null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "feeder_feeds", force: true do |t|
-    t.string   "title",      null: false
-    t.text     "content",    null: false
-    t.string   "url",        null: false
-    t.text     "analyzed",   null: false
-    t.string   "language"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

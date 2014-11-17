@@ -6,7 +6,9 @@ module Feeder
   	validates :title,    presence: true
   	validates :content,  presence:true
   	validates :url,      presence: true
-  	validates :analyzed, presence: true
-  	validates :language, presence: true
+  	
+  	
+
+  	
   end
 end

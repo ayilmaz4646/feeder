@@ -1,13 +1,7 @@
 Feeder::Engine.routes.draw do
-  get 'feeds/new'
 
-  get 'feeds/edit'
-
-  get 'feeds/show'
-
-  get 'feed_sources/new'
-
-  get 'feed_sources/edit'
+	resources :feed_sources
+	resources :feeds
 
   get 'home/index'
 
