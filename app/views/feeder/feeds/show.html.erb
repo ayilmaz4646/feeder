@@ -1,2 +1,4 @@
-<h1>Feeds#show</h1>
-<p>Find me in app/views/feeder/feeds/show.html.erb</p>
+<article>
+	<h1><%= @feed.title %></h1>
+	<%= sanitize(@feed.content) %>
+</article>

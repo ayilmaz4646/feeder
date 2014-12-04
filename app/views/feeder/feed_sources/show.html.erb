@@ -10,3 +10,9 @@
 
 <%= link_to 'Edit', edit_feed_source_path(@feed_source) %> |
 <%= link_to 'Back', feed_sources_path %>
+<ul>
+	<%= render @feed_source.feeds %>
+</ul>
+<p>
+       <%= @feeds.entries %>
+</p>

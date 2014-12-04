@@ -6,26 +6,32 @@ module Feeder
   	validates :title, presence: true
   	validates :url,   presence: true
 
-  	def get_entries(source_feed)
-  		updated_feed = Feedjira::Feed.fetch_and_parse(source_feed.url)
+  	def get_entries
+  		updated_feed = Feedjira::Feed.fetch_and_parse(self.url)
   		unless updated_feed.nil?
   			unless updated_feed.entries.nil?
   				updated_feed.entries.each do |entry|
-  					create_new_entry(entry, source_feed)
+  					create_new_entry(entry, self.id)
   				end
-  				source_feed.title = updated_feed.title
-  				source_feed.url = updated_feed.url
-  				source_feed.save!  				
+  				self.title = updated_feed.title
+          self.url = updated_feed.url
+          self.save! 				
   			end
   		end
   	end
 
-  	def create_new_entry(e, f)
-  			Feed.create!(
-  				title:          e.title,
-  				url:            e.url,
-  				content:        e.content
-  				)
+  	def create_new_entry(e, fid)
+      unless Feed.exists?(condition: [e.entry_id, fid])
+        Feed.create!(
+          title:   e.title,
+          url:     e.url,
+          #content: e.content,
+          entry_id: e.entry_id,
+          feed_source_id: fid
+
+          )
+      end
+  			
   	end
 
   end

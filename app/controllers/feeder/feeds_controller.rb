@@ -4,16 +4,20 @@ module Feeder
   class FeedsController < ApplicationController
 
     def new
-    	@feed = Feeds.new
+    	@feed = Feed.new
     end
 
     def edit
-    	@feed = Feeds.find(params[:id])
+    	@feed = Feed.find(params[:id])
+    end
+
+    def show
+      @feed = Feed.find(params[:id])
     end
 
     def create
     	
-    	@feed = Feeds.new(feed_params)
+    	@feed = Feed.new(feed_params)
 
     	if @feed.save
       	redirect_to @feed, notice: 'Başarıyla Oluşturuldu'
@@ -23,7 +27,7 @@ module Feeder
 		end
 
 		def destroy
-    	@feed = Feeds.find(params[:id])
+    	@feed = Feed.find(params[:id])
     	@feed.destroy
 		end
 
