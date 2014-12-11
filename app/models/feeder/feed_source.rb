@@ -21,7 +21,7 @@ module Feeder
   	end
 
   	def create_new_entry(e, fid)
-      unless Feed.exists?(condition: [e.entry_id, fid])
+      unless Feed.exists?(['entry_id = ? AND feed_source_id = ?', e.entry_id, fid])
         Feed.create!(
           title:   e.title,
           url:     e.url,
