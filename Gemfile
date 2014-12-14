@@ -13,5 +13,5 @@ gemspec
 # To use debugger
 # gem 'debugger'
 gem 'feedjira'
-gem "resque", "~> 1.25"#, github: "resque/resque"
-gem 'resque-scheduler'
+gem "resque", "~> 1.25", require: "resque/server"
+gem 'resque-scheduler', require: "resque/server"

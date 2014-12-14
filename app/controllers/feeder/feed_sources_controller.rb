@@ -18,7 +18,7 @@ module Feeder
     def show
     	@feed_source = FeedSource.find(params[:id])
       #@feed_source.get_entries
-      #@feeds = Feedjira::Feed.fetch_and_parse(@feed_source.url)
+      @feeds = Feedjira::Feed.fetch_and_parse(@feed_source.url)
     end
 
     def create
