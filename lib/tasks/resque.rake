@@ -4,11 +4,11 @@ require 'resque/tasks'
 namespace :resque do
   task :setup do
     require 'resque'
-    require 'resque-scheduler'
+    #require 'resque-scheduler'
 
     Resque.redis = 'localhost:6379'
-    Resque.schedule = YAML.load_file('resque_schedule.yml')
+    #Resque.schedule = YAML.load_file('resque_schedule.yml')
 
-    require 'jobs'
+    #require 'jobs'
   end
 end

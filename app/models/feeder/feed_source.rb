@@ -7,9 +7,9 @@ module
   	validates :title, presence: true
   	validates :url,   presence: true
 
-    after_create :feed_samples
+    after_create :get_feed_entries
 
-    def get_entries
+    def get_entries(feed_source)
       updated_feed = Feedjira::Feed.fetch_and_parse(self.url)
       unless updated_feed.nil?
         unless updated_feed.entries.nil?
@@ -37,8 +37,8 @@ module
 
     private
 
-    def feed_samples
-      Resque.enqueue(ResqueWorker, feed_source.id)
+    def get_feed_entries
+      Resque.enqueue(FeedCheckerWorker, self.id)
     end
 
   end
