@@ -1,6 +1,8 @@
 class AddDurationLastCheckTimeToFeederFeedSources < ActiveRecord::Migration
   def change
-  	add_column :feeder_feed_sources, :duration, :string
-  	add_column :feeder_feed_sources, :last_check_time, :string
+  	change_table  :feeder_feed_sources do |t|
+  		t.string    :duration
+  		t.datetime  :last_check_time
+  	end
   end
 end

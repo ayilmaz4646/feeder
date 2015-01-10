@@ -13,6 +13,7 @@ module Feeder
 
     def show
       @feed = Feed.find(params[:id])
+      @new_content = @feed.text_extraction_with_alchemyapi
     end
 
     def create

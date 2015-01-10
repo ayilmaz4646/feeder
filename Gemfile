@@ -15,3 +15,4 @@ gemspec
 gem 'feedjira'
 gem "resque", "~> 1.25", require: "resque/server"
 gem 'resque-scheduler', require: "resque/server"
+gem 'alchemy-api-rb', require: 'alchemy_api'

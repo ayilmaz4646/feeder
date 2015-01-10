@@ -1,4 +1,6 @@
 <article>
+<p><%= @new_content %></p>
 	<h1><%= @feed.title %></h1>
+	<h3><%= @feed.url %></h3>
 	<%= sanitize(@feed.content) %>
 </article>
