@@ -11,11 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109124651) do
+ActiveRecord::Schema.define(version: 20150115110106) do
 
   create_table "feeder_feed_sources", force: true do |t|
-    t.string   "title"
-    t.string   "url",        null: false
+    t.string   "title",           null: false
+    t.string   "url"
+    t.string   "duration"
+    t.datetime "last_check_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feeder_feeds", force: true do |t|
+    t.string   "title",                          null: false
+    t.text     "content"
+    t.string   "url"
+    t.boolean  "analyzed",       default: false
+    t.string   "language",       default: "f"
+    t.integer  "feed_source_id"
+    t.string   "entry_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feeder_feeds", ["entry_id", "feed_source_id"], name: "index_feeder_feeds_on_entry_id_and_feed_source_id", unique: true
+
+  create_table "feeder_feeds_sites", force: true do |t|
+    t.integer "site_id"
+    t.integer "feed_id"
+  end
+
+  create_table "feeder_sites", force: true do |t|
+    t.string   "domain",      limit: 500,  null: false
+    t.string   "title",       limit: 1000
+    t.text     "description"
+    t.text     "keywords"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feeder_sites_feeds", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "feed_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

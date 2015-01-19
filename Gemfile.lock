@@ -39,6 +39,7 @@ GEM
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     curb (0.8.6)
+    domainator (2.0.0)
     erubis (2.7.0)
     excon (0.43.0)
     faraday (0.8.9)
@@ -126,6 +127,7 @@ PLATFORMS
 
 DEPENDENCIES
   alchemy-api-rb
+  domainator
   feeder!
   feedjira
   resque (~> 1.25)

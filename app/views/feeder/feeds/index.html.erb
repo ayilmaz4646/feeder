@@ -1,0 +1,10 @@
+ 
+ <% @feeds.each do |feed| %>
+  <tr>
+    <ul>
+      <td><%= link_to feed.url, feed_path(feed) %></td>
+      <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+      <td><%= link_to 'Destroy', feed_path(feed), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </ul>
+  </tr>
+<% end %>

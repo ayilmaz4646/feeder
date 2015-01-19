@@ -1,0 +1,22 @@
+<%= form_for @sites do |f| %>
+	<p>
+    <%= f.label :domain %><br>
+    <%= f.text_area :domain %>
+  </p>
+	<p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+	<p>
+    <%= f.label :title %><br>
+    <%= f.text_area :title %>
+  </p>
+  <p>
+    <%= f.label :keywords %><br>
+    <%= f.text_area :keywords %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

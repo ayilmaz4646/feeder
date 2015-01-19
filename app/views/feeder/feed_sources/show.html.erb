@@ -6,6 +6,16 @@
 <p>
   <strong>Url:</strong>
   <%= @feed_source.url %>
+
+  <% if current_user? %>
+  	<% button_text = 'follow' %>
+  	<%= button_to button_text %>
+   	<%#= button_tag(type: 'button') do %>
+  		<%# button_text = 'follow' %>
+    	<%#= content_tag(:strong, button_text ) %>
+  	<%#end%>
+  	<%# if Follow  %>
+  <%end%>
 </p>
 
 <%= link_to 'Edit', edit_feed_source_path(@feed_source) %> |

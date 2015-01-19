@@ -1,0 +1,6 @@
+en:
+  simple_form:
+    labels:
+      feed_source:
+        title: "Title"
+        url: "url"

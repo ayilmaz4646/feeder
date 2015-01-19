@@ -7,8 +7,10 @@ class CreateFeederFeeds < ActiveRecord::Migration
       t.boolean :analyzed, default: false
       t.string  :language, default: false
       t.integer :feed_source_id
+      t.string  :entry_id
       
       t.timestamps
     end
+    add_index :feeder_feeds, [:entry_id, :feed_source_id], unique: true
   end
 end

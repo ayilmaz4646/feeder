@@ -1,6 +1,17 @@
 <article>
-<p><%= @new_content %></p>
+<p>Links:	<%= @links.to_s %></p>
+<h1>Title: <%= @title %></h1>
+<h3>Author: <%= @author %></h3>
+<h1>Lang: <%= @lang1 %></h1>
+<p>N.Cont: <%= @new_content %></p>
 	<h1><%= @feed.title %></h1>
 	<h3><%= @feed.url %></h3>
+	
 	<%= sanitize(@feed.content) %>
+
+<ol>
+	<% @feed.sites.each do |site| %>
+	  <li><%= link_to site.domain, site_path(site) %></li>
+	<% end %>
+</ol>
 </article>

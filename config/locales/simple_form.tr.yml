@@ -1,0 +1,6 @@
+tr:
+  simple_form:
+    labels:
+      feed_source:
+        title: "baslık"
+        url: "url"
