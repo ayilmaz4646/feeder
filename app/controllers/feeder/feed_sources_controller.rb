@@ -2,7 +2,7 @@ require_dependency "feeder/application_controller"
 
 module Feeder
   class FeedSourcesController < ApplicationController
-    before_action :require_login!, except: [:index, :show]
+    before_action :require_login, except: [:index, :show]
     #before_action only: [:edit, :update, :destroy] do
      # validate_permission!(set_topic.user)
     #end
@@ -18,6 +18,11 @@ module Feeder
 
     def edit
     	@feed_source = FeedSource.find(params[:id])
+    end
+
+    def follow
+      @feed_source  = FeedSource.find(params[:id])
+      @feed_source.follow(current_user)
     end
 
     def show

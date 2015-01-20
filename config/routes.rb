@@ -1,6 +1,8 @@
 Feeder::Engine.routes.draw do
 
-	resources :feed_sources
+	resources :feed_sources do
+		put 'follow', on: :member
+	end
 	resources :feeds
 	resources :sites
 

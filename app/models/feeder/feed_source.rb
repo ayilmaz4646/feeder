@@ -3,6 +3,7 @@ module
   class FeedSource < ActiveRecord::Base
 
   	has_many :feeds, dependent: :destroy
+    #has_many :followers, through: :user_source 
 
   	#validates :title, presence: true
   	validates :url,   presence: true
@@ -36,6 +37,10 @@ module
         end
       end
   	end
+
+    def follow
+      UserSource.find_or_create_by(user_id: current_user.id, feed_source_id: self.id)
+    end
 
   private
     def get_feed_entries

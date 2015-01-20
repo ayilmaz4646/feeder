@@ -7,14 +7,9 @@
   <strong>Url:</strong>
   <%= @feed_source.url %>
 
-  <% if current_user? %>
-  	<% button_text = 'follow' %>
-  	<%= button_to button_text %>
-   	<%#= button_tag(type: 'button') do %>
-  		<%# button_text = 'follow' %>
-    	<%#= content_tag(:strong, button_text ) %>
-  	<%#end%>
-  	<%# if Follow  %>
+  <% if current_user %>
+  	<% button_text = 'Follow' %>
+  	<%= link to button_text, follow_feed_source(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>
   <%end%>
 </p>
 
