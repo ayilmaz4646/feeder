@@ -11,7 +11,7 @@
 <p>
   <% if current_user %>
   	<% if @feed.liked_by?(current_user.id) %>
-  		<%= link_to 'Unlike', unlike_feed_path(@feed), method: :delete %>
+  		<%= link_to 'Unlike', unlike_feed_path(@feed), remote: true, method: :delete %>
   	<% else %>
   		<%= link_to 'Like', like_feed_path(@feed), remote: true, id: "feed_id", "data-posref" => @user_like %>
   	<%end%>
