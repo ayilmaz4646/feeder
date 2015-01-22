@@ -1,9 +1,13 @@
 Feeder::Engine.routes.draw do
 
 	resources :feed_sources do
-		put 'follow', on: :member
+		get 'follow', on: :member
+		get 'unfollow', on: :member
 	end
-	resources :feeds
+	resources :feeds do
+		get 'like', on: :member
+		get 'unlike', on: :member
+	end
 	resources :sites
 
   #get 'home/index'

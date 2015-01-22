@@ -38,8 +38,12 @@ module
       end
   	end
 
-    def follow
-      UserSource.find_or_create_by(user_id: current_user.id, feed_source_id: self.id)
+    def follow(user_id)
+      UserSource.find_or_create_by(user_id: user_id, feed_source_id: self.id)
+    end
+
+    def followed_by?(user_id)
+      !UserSource.where(user_id: user_id, feed_source_id: self.id).empty?
     end
 
   private

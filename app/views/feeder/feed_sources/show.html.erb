@@ -8,8 +8,11 @@
   <%= @feed_source.url %>
 
   <% if current_user %>
-  	<% button_text = 'Follow' %>
-  	<%= link to button_text, follow_feed_source(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>
+  	<% if @feed_source.followed_by?(current_user.id) %>
+  		<%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), method: :delete %>
+  	<% else %>
+  		<%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>
+  	<%end%>
   <%end%>
 </p>
 

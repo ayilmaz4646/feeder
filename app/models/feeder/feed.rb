@@ -63,6 +63,14 @@ module Feeder
       title = AlchemyAPI::TitleExtraction.new.search(url: self.url)
       title
   	end
+
+    def like(user_id)
+      UserLike.find_or_create_by(user_id: user_id, feed_id: self.id)
+    end
+
+    def liked_by?(user_id)
+      !UserLike.where(user_id: user_id, feed_id: self.id).empty?
+    end
   	
-  	end
+  end
 end

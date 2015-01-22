@@ -15,6 +15,18 @@ module Feeder
     	@feed = Feed.find(params[:id])
     end
 
+    def like
+      @feed  = Feed.find(params[:id])
+      @feed.like(current_user.id)
+    end
+
+    def unlike
+      @feed  = Feed.find(params[:id])
+      @feed.like(current_user.id)
+      @user_like = @feed.like(current_user.id)
+      @user_like.destroy
+    end
+
     def show
       @feed = Feed.find(params[:id])
       @new_content = @feed.text_extraction_with_alchemyapi
