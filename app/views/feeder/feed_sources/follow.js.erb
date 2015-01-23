@@ -1,1 +1,1 @@
-$("#Follow").replaceWith('<%= j link_to Unfollow %>');
+$("#follow_buttons").html('<%= j link_to "Quit Following", feeder.unfollow_feed_source_path(@feed_source), remote: true %>');

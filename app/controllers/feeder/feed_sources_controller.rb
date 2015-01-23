@@ -27,9 +27,7 @@ module Feeder
 
     def unfollow
       @feed_source  = FeedSource.find(params[:id])
-      @feed_source.follow(current_user.id)
-      @user_source = @feed_source.follow(current_user.id)
-      @user_source.destroy
+      @feed_source.unfollow(current_user.id)
     end
 
     def show

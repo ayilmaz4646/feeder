@@ -42,6 +42,11 @@ module
       UserSource.find_or_create_by(user_id: user_id, feed_source_id: self.id)
     end
 
+    def unfollow(user_id)
+      user_source = UserSource.find_by(user_id: user_id, feed_source_id: self.id)
+      user_source.destroy
+    end
+
     def followed_by?(user_id)
       !UserSource.where(user_id: user_id, feed_source_id: self.id).empty?
     end

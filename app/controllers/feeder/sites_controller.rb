@@ -12,7 +12,7 @@ module Feeder
     end
 
     def show
-    	 @site = Site.find(params[:id])
+    	@site = Site.find(params[:id])
     end
 
   end

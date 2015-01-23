@@ -22,9 +22,7 @@ module Feeder
 
     def unlike
       @feed  = Feed.find(params[:id])
-      @feed.like(current_user.id)
-      @user_like = @feed.like(current_user.id)
-      @user_like.destroy
+      @feed.unlike(current_user.id)
     end
 
     def show

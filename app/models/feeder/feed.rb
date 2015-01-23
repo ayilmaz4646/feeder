@@ -68,6 +68,11 @@ module Feeder
       UserLike.find_or_create_by(user_id: user_id, feed_id: self.id)
     end
 
+    def unlike(user_id)
+      user_like = UserLike.find_by(user_id: user_id, feed_id: self.id)
+      user_like.destroy
+    end
+
     def liked_by?(user_id)
       !UserLike.where(user_id: user_id, feed_id: self.id).empty?
     end
