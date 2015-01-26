@@ -7,12 +7,13 @@ module Feeder
 
   	validates :domain, presence: true
 
-  	def title_of_site(site_url)
-  		agent = Mechanize.new
-  		page = agent.get(site_url)
-  		title = @page.title
-  		Site.find_or_create_by(domain: site_url, title: title)
-  	end
+  	# def get_title
+  	# 	agent = Mechanize.new
+    #   site_url = "http://" + self.domain
+  	# 	page  = agent.get(site_url)
+  	# 	page_title = page.title
+  	# 	self.update(title: page_title)
+  	# end
 
   end
 end

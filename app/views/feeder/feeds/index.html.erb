@@ -1,10 +1,17 @@
- 
- <% @feeds.each do |feed| %>
-  <tr>
-    <ul>
-      <td><%= link_to feed.url, feed_path(feed) %></td>
-      <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-      <td><%= link_to 'Destroy', feed_path(feed), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </ul>
-  </tr>
-<% end %>
+<div class="row">
+	<div class="col-md-12">
+		<div class="blog-posts">
+
+			<section class="timeline">
+				<div class="timeline-body">
+					<% @feeds.each do |feed| %>
+						<article class='timeline-box <%= (cycle("odd", "even") == "odd") ? "left" : "right" %> post post-medium'>
+							<%= render feed %>
+						</article>
+					<% end %>
+				</div>
+			</section>
+
+		</div>
+	</div>
+</div>

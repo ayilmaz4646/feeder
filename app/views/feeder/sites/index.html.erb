@@ -1,9 +1,20 @@
-<% @site.each do |site| %>
-  <tr>
-    <li>
-      <td><%= site.domain %></td>
-      <td><%= link_to 'Show', site %></td>
-      <td><%= link_to 'Edit', edit_site_path(site) %></td>
-    </li>
-	</tr>
-<% end %>
+<table>
+	<thead>
+		<tr>
+			<th>Domain</th>
+			<th>Title</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @site.each do |site| %>
+		  <tr>
+		      <td><%= site.domain %></td>
+		      <td><%= site.title %></td>
+		      <td><%= link_to 'Show', site %></td>
+		      <td><%= link_to 'Edit', edit_site_path(site) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

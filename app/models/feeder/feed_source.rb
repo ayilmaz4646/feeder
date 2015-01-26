@@ -20,9 +20,10 @@ module
           #update_feed_source_info(new_feeds)
         else
           #TODO hiç entries gelmedi hata logu at
+          create_error(nil, nil, "no_entries")
         end
       else
-        #TODO rss url ulaşamadı hata logu at
+        create_error(nil, nil, "rss_source_not_valid")
       end
     end
 
@@ -33,7 +34,7 @@ module
         if new_feed.valid?
           new_feed.save!
         else
-          #TODO rss valid değil hata kodu kayıt
+          create_error(new_feed.to_s, new_feed.errors.full_messages, "feed_not_valid")
         end
       end
   	end
@@ -62,6 +63,10 @@ module
       end
       self.last_check_time = Time.now
       self.save!
+    end
+
+    def create_error(feedParam, errorMessage, errorType)
+      FeedError.add_new_error(self.id, feedParam, errorMessage, errorType)
     end
   end
 end
