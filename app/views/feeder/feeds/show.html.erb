@@ -7,7 +7,9 @@
 	<%#= sanitize(@feed.content) %>
 </article>
 <div class="row">
-  <div class="col-md-9">
+<div class="col-md-2"><!--CSS YAZ-->
+</div>
+  <div class="col-md-8">
     <div class="blog-posts single-post">
 
       <article class="post post-large blog-single-post">
@@ -24,7 +26,6 @@
           <p> <%= @new_content %> </p>
           <p>link: <%= link_to @feed.url, "#{@feed.url}" %></p>
           <%= render "feed_meta" %>
-          <p>
             <div id="like_buttons" class="row">
               <% if current_user %>
                 <% if @feed.liked_by?(current_user.id) %>
@@ -34,16 +35,10 @@
                 <%end%>
               <%end%>
             </div>
-          </p>
-          <ol>
-            <% @feed.sites.each do |site| %>
-              <li><%= link_to site.domain, site_path(site) %></li>
-            <% end %>
-          </ol>
-          <div class="post-block post-share">
+          <!--div class="post-block post-share">
             <h3><i class="fa fa-share"></i>Share this post</h3>
 
-            <!-- AddThis Button BEGIN -->
+            <!-- AddThis Button BEGIN >
             <div class="addthis_toolbox addthis_default_style ">
               <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
               <a class="addthis_button_tweet"></a>
@@ -51,18 +46,23 @@
               <a class="addthis_counter addthis_pill_style"></a>
             </div>
             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>
-            <!-- AddThis Button END -->
-
+            <!-- AddThis Button END >
           </div>
-
-
-        </div>
+          </div-->
+          <h5> Yazıda Geçen Linkler </h5>
+          <ol>
+            <% @feed.sites.each do |site| %>
+              <li><%= link_to site.domain, site_path(site) %></li>
+            <% end %>
+          </ol>
       </article>
 
     </div>
   </div>
+  <div class="col-md-2">
+  </div>
 
-  <div class="col-md-3">
+  <!--div class="col-md-3">
     <aside class="sidebar">
 
       <form>
@@ -198,5 +198,5 @@
       <p>Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Nulla nunc dui, tristique in semper vel. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. </p>
 
     </aside>
-  </div>
+  </div-->
 </div>

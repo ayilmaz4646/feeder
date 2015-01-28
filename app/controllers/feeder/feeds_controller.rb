@@ -4,7 +4,11 @@ module Feeder
   class FeedsController < ApplicationController
 
     def index
-      @feeds = Feed.all
+      @feeds = Feed.page(params[:page]).per(8)
+      respond_to do |format|
+        format.html
+        format.js 
+      end
     end
 
     def new

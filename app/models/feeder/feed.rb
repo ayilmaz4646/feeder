@@ -49,6 +49,8 @@ module Feeder
   	def author_extraction_with_alchemyapi
   		AlchemyAPI::Config.output_mode = :json
       author = AlchemyAPI::AuthorExtraction.new.search(url: self.url)
+      self.author = author
+      self.save
       author
   	end
 
@@ -63,6 +65,14 @@ module Feeder
       title = AlchemyAPI::TitleExtraction.new.search(url: self.url)
       title
   	end
+
+    def publication_date_with_alchemyapi
+      AlchemyAPI::Config.output_mode = :json
+      published_at = AlchemyAPI::PublicationDate.new.search(url: self.url)
+      self.published_at = published_at
+      self.save
+      published_at
+    end
 
     def like(user_id)
       UserLike.find_or_create_by(user_id: user_id, feed_id: self.id)
