@@ -13,6 +13,7 @@ module Feeder
 
     def show
     	@site = Site.find(params[:id])
+      @feeds = @site.feeds.order(created_at: :desc).page(params[:page]).per(8)
     end
 
   end

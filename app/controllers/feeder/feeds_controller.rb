@@ -3,12 +3,10 @@ require_dependency "feeder/application_controller"
 module Feeder
   class FeedsController < ApplicationController
 
+    before_action :set_feed, only: [:show, :edit, :like, :unlike, :destroy]
+
     def index
-      @feeds = Feed.page(params[:page]).per(8)
-      respond_to do |format|
-        format.html
-        format.js 
-      end
+      @feeds = Feed.order(created_at: :desc, likes_count: :desc).page(params[:page]).per(8)
     end
 
     def new
@@ -16,26 +14,15 @@ module Feeder
     end
 
     def edit
-    	@feed = Feed.find(params[:id])
-    end
-
-    def like
-      @feed  = Feed.find(params[:id])
-      @feed.like(current_user.id)
-    end
-
-    def unlike
-      @feed  = Feed.find(params[:id])
-      @feed.unlike(current_user.id)
     end
 
     def show
-      @feed = Feed.find(params[:id])
-      @new_content = @feed.text_extraction_with_alchemyapi
-      @author = @feed.author_extraction_with_alchemyapi
-      @lang1 = @feed.language_detection_with_alchemyapi
-      @title = @feed.title_extraction_with_alchemyapi
-      @feed.set_relation_to_sites
+      # @new_content = @feed.text_extraction_with_alchemyapi
+      # @author = @feed.author_extraction_with_alchemyapi
+      # @lang1  = @feed.language_detection_with_alchemyapi
+      # @title  = @feed.title_extraction_with_alchemyapi
+      # @image  = @feed.image_tagging_with_alchemyapi
+      #@feed.set_relation_to_sites
     end
 
     def create
@@ -49,13 +36,25 @@ module Feeder
     	end
 		end
 
+    def like
+      @feed.like(current_user.id)
+      @feed.reload
+    end
+
+    def unlike
+      @feed.unlike(current_user.id)
+      @feed.reload
+    end
+
 		def destroy
-    	@feed = Feed.find(params[:id])
     	@feed.destroy
 		end
 
     private
-    
+    def set_feed
+      @feed = Feed.find(params[:id])
+    end
+
     def feed_params
       params.require(:feed).permit(:title, :content, :url, :analyzed, :language)
     end

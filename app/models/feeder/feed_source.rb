@@ -34,7 +34,7 @@ module
         if new_feed.valid?
           new_feed.save!
         else
-          create_error(new_feed.to_s, new_feed.errors.full_messages, "feed_not_valid")
+          create_error(new_feed.to_s, new_feed.errors.full_messages.to_s, "feed_not_valid")
         end
       end
   	end
@@ -52,10 +52,11 @@ module
       !UserSource.where(user_id: user_id, feed_source_id: self.id).empty?
     end
 
-  private
     def get_feed_entries
       Resque.enqueue(FeedCheckerWorker, self.id)
     end
+
+  private
 
     def update_feed_source_info(new_rec)
       if self.title != new_rec.title

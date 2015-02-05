@@ -1,1 +1,2 @@
-$(".timeline-body").append('<%= j render "feeder/feeds/box", collection: @feeds, as: :feed %>');
+$(".timeline-body").append('<%= j render "feeder/feeds/box", feeds: @feeds %>');
+$("#load_more_link").replaceWith('<%= link_to_next_page @feeds, "Load More", remote: true, id: "load_more_link" %>');

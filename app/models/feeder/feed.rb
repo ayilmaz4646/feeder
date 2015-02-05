@@ -12,20 +12,6 @@ module Feeder
 
   	after_create :analyze_feed
 
-  	def decomposition_url
-  		links = []
-  		content.scan(/href\s*=\s*\"*[^\">]*/i) do |link|
-      	link = link.sub(/href="/i, "")
-      	unless link.nil?
-      		link = link.downcase
-      		uri = URI.parse(URI.encode(link))
-      		link = Domainator.parse(uri)
-				end
-        links << link
-      end
-      links
-    end
-
 		def analyze_feed
   		Resque.enqueue(FeedAnalyzerWorker, self.id)
   	end
@@ -38,40 +24,41 @@ module Feeder
   		end
   	end
 
-  	def text_extraction_with_alchemyapi
-  		AlchemyAPI::Config.output_mode = :json
-      content = AlchemyAPI::TextExtraction.new.search(url: self.url)
-      #self.content = content
-      #self.save
-      content
-  	end
+    def alchemy_get_combined_data
+      alchemyapi = Feeder::Alchemyapi.new()
+      response = alchemyapi.combined('url', self.url, { 'extract'=>'page-image,taxonomy,title,author,pub-date' })
+      if response['status'] == 'OK'
 
-  	def author_extraction_with_alchemyapi
-  		AlchemyAPI::Config.output_mode = :json
-      author = AlchemyAPI::AuthorExtraction.new.search(url: self.url)
-      self.author = author
-      self.save
-      author
-  	end
-
-  	def language_detection_with_alchemyapi
-  		AlchemyAPI::Config.output_mode = :json
-      lang = AlchemyAPI::LanguageDetection.new.search(url: self.url)
-      #lang1 = lang['language']
-  	end
-
-  	def title_extraction_with_alchemyapi
-  		AlchemyAPI::Config.output_mode = :json
-      title = AlchemyAPI::TitleExtraction.new.search(url: self.url)
-      title
-  	end
-
-    def publication_date_with_alchemyapi
-      AlchemyAPI::Config.output_mode = :json
-      published_at = AlchemyAPI::PublicationDate.new.search(url: self.url)
-      self.published_at = published_at
-      self.save
-      published_at
+        if response.key?('image')
+          self.image_url = response['image']
+        end
+        if response.key?('title')
+          self.title = response['title']
+        end
+        if response.key?('author')
+          self.author = response['author']
+        end
+        if response.key?('url')
+          self.url = response['url']
+        end
+        if response.key?('language')
+          self.language = response['language']
+        end
+        if response.key?('publicationDate')
+          self.published_at = Date.parse(response['publicationDate']['date'])
+        end
+        self.analyzed = true
+        self.save
+        # if response.key?('taxonomy')
+        #   puts 'Entities:'
+        #   for entity in response['taxonomy']
+        #     puts "\trelevance: " + entity['label']
+        #     puts "\ttext: "      + entity['score']
+        #   end
+        # end
+      else
+        puts 'Error in combined call: ' + response['statusInfo']
+      end      
     end
 
     def like(user_id)
@@ -86,6 +73,20 @@ module Feeder
     def liked_by?(user_id)
       !UserLike.where(user_id: user_id, feed_id: self.id).empty?
     end
-  	
+
+  private
+    def decomposition_url
+      links = []
+      content.scan(/href\s*=\s*\"*[^\">]*/i) do |link|
+        link = link.sub(/href="/i, "")
+        unless link.nil?
+          link = link.downcase
+          uri = URI.parse(URI.encode(link))
+          link = Domainator.parse(uri)
+        end
+        links << link
+      end
+      links
+    end
   end
 end

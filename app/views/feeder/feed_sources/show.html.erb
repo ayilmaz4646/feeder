@@ -1,27 +1,19 @@
-<p>
-  <strong>Title:</strong>
-  <%= @feed_source.title %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @feed_source.url %>
-  <div id="follow_buttons" class= "row" >
+<div class="row">
+  <h3><%= @feed_source.title %></h3>
+  <h4><%= @feed_source.url %></h4>
+ <div id="follow_buttons" class= "row" >
     <% if current_user %>
-    	<% if @feed_source.followed_by?(current_user.id) %>
-    		<%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), remote: true %>  
-  	  <% else %>
-    		<%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>  
-  	  <%end%>
+      <% if @feed_source.followed_by?(current_user.id) %>
+        <%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), remote: true %>  
+      <% else %>
+        <%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>  
+      <%end%>
     <%end%>
   </div>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_feed_source_path(@feed_source) %> |
-<%= link_to 'Back', feed_sources_path %>
-<ul>
-	<%= render @feed_source.feeds %>
-</ul>
-<p>
-       <%#= @feeds.entries %>
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <%= render "feeder/feeds/list", feeds: @feeds %>
+  </div>
+</div>

@@ -32,7 +32,7 @@ module Feeder
 
     def show
     	@feed_source = FeedSource.find(params[:id])
-
+      @feeds = @feed_source.feeds.order(created_at: :desc).page(params[:page]).per(8)
       #@feed_source.get_entries
       #@feeds = Feedjira::Feed.fetch_and_parse(@feed_source.url)
     end
