@@ -29,9 +29,9 @@ module Feeder
       response = alchemyapi.combined('url', self.url, { 'extract'=>'page-image,taxonomy,title,author,pub-date' })
       if response['status'] == 'OK'
 
-        if response.key?('image')
-          self.image_url = response['image']
-        end
+        #if response.key?('image')
+         # self.image_url = response['image']
+        #end
         if response.key?('title')
           self.title = response['title']
         end

@@ -7,7 +7,40 @@ module Feeder
 
   	validates :domain, presence: true
 
-  	# def get_title
+    after_create :analyze_site
+
+    def analyze_site
+      Resque.enqueue(SiteAnalyzerWorker, self.id)
+    end
+
+    def title_of_site_with_metainspector
+      page = MetaInspector.new(self.domain)
+      self.title = page.title
+      save
+    end
+
+    def description_of_site_with_metainspector
+      page = MetaInspector.new(self.domain)
+      self.description = page.description
+      save
+    end
+
+    def keywords_of_site_with_metainspector
+      page = MetaInspector.new(self.domain)
+      self.keywords = page.meta['keywords']
+      save
+    end
+
+    def icon_of_site_with_metainspector
+      page = MetaInspector.new(self.domain)
+      self.image_url = page.images.favicon
+      save
+    end
+
+
+
+
+  	# def analyze
   	# 	agent = Mechanize.new
     #   site_url = "http://" + self.domain
   	# 	page  = agent.get(site_url)

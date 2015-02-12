@@ -21,7 +21,6 @@ module Feeder
       # @author = @feed.author_extraction_with_alchemyapi
       # @lang1  = @feed.language_detection_with_alchemyapi
       # @title  = @feed.title_extraction_with_alchemyapi
-      # @image  = @feed.image_tagging_with_alchemyapi
       #@feed.set_relation_to_sites
     end
 
