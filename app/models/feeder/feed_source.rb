@@ -11,7 +11,8 @@ module
     after_create :get_feed_entries
 
     def get_entries
-      new_feeds = Feedjira::Feed.fetch_and_parse(self.url)
+      xml = open( self.url ).read
+      new_feeds = FeedParser::Parser.parse( xml )
       unless new_feeds.nil?
         unless new_feeds.entries.nil?
           new_feeds.entries.each do |entry|
