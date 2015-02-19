@@ -1,12 +1,8 @@
 <div class="row">
 	<div class="col-md-12">
-		<h1><%= @site.domain %></h1>
-		<h3><%= @site.title %></h3>
-	</div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <%= render "feeder/feeds/list", feeds: @feeds %>
+    <%= render partial: "header" %>
   </div>
+	<div class="col-md-12">
+  	<%= render "feeder/feeds/list", feeds: @feeds %>
+	</div>
 </div>
