@@ -1,5 +1,9 @@
 Feeder::Engine.routes.draw do
 
+  get 'user_readlaters/index'
+
+  get 'user_readlaters/show'
+
 	resources :feed_sources do
 		get 'follow', on: :member
 		get 'unfollow', on: :member
@@ -13,7 +17,7 @@ Feeder::Engine.routes.draw do
 		get 'undo_readlater', on: :member
 	end
 	resources :sites
-	resources :readlaters
+	resources :user_readlaters
 	
 
   #get 'home/index'
