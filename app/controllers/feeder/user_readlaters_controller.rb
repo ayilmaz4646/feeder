@@ -3,9 +3,9 @@ require_dependency "feeder/application_controller"
 module Feeder
   class UserReadlatersController < ApplicationController
     def index
-    	@readlater = UserReadlater.find(current_user.id)
-      @feeds = @readlater.feeds.order(created_at: :desc)
+    	@current_user ||= User.find(session[:user_id]) if session[:user_id]
+      @feeds = @current_user.feeds.order(created_at: :desc)
     end
-    
+
   end
 end
