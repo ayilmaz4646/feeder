@@ -12,8 +12,8 @@
       <%= render "feeder/feeds/feed_meta", feed: feed %>
       <p><%= sanitize feed.content %></p>
       <%= render "feeder/feeds/feed_meta", feed: feed %>
-
-        <div id="like_buttons" class="row">
+      <div class="row">
+        <div id="like_buttons" class="col-md-2">
           <% if current_user %>
             <% if feed.liked_by?(current_user.id) %>
               <p><%= link_to "Unlike(#{feed.likes_count})", unlike_feed_path(feed), remote: true %></p>
@@ -22,6 +22,17 @@
             <%end%>
           <%end%>
         </div>
+        <div id="readlater_buttons" class="col-md-3">
+          <% if current_user %>
+            <% if feed.readlater_by?(current_user.id) %>
+              <p><%= link_to "Undo Read Later", undo_readlater_feed_path(feed), remote: true %></p>
+            <% else %>
+              <p><%= link_to "Read Later", readlater_feed_path(feed), remote: true %></p>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+        <%= social_share_button_tag(@feed.title) %>
       <h5> Yazıda Geçen Linkler </h5>
       <ol>
         <% feed.sites.each do |site| %>

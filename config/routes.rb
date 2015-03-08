@@ -8,7 +8,13 @@ Feeder::Engine.routes.draw do
 		get 'like', on: :member
 		get 'unlike', on: :member
 	end
+	resources :feeds do
+		get 'readlater', on: :member
+		get 'undo_readlater', on: :member
+	end
 	resources :sites
+	resources :readlaters
+	
 
   #get 'home/index'
 	#root :to => "home#index"

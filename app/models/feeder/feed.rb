@@ -74,6 +74,19 @@ module Feeder
       !UserLike.where(user_id: user_id, feed_id: self.id).empty?
     end
 
+    def readlater(user_id)
+      UserReadlater.find_or_create_by(user_id: user_id, feed_id: self.id)
+    end
+
+    def undo_readlater(user_id)
+      readlater = UserReadlater.find_by(user_id: user_id, feed_id: self.id)
+      readlater.destroy
+    end
+
+    def readlater_by?(user_id)
+      !UserReadlater.where(user_id: user_id, feed_id: self.id).empty?
+    end
+
   private
     def decomposition_url
       links = []

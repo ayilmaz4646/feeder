@@ -45,6 +45,16 @@ module Feeder
       @feed.reload
     end
 
+    def readlater
+      @feed  = Feed.find(params[:id])
+      @feed.readlater(current_user.id)
+    end
+
+    def undo_readlater
+      @feed  = Feed.find(params[:id])
+      @feed.undo_readlater(current_user.id)
+    end
+
 		def destroy
     	@feed.destroy
 		end

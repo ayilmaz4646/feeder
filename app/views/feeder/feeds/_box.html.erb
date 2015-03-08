@@ -1,6 +1,5 @@
-
-				<% feeds.each do |feed| %>
-					<article class='timeline-box <%= (cycle("odd", "even") == "odd") ? "left" : "right" %> post post-medium'>
-						<%= render "feeder/feeds/thumbnail", feed: feed %>
-					</article>
-				<% end %>
+<% feeds.each do |feed| %>
+	<article class='timeline-box <%= (cycle("odd", "even") == "odd") ? "left" : "right" %> post post-medium'>
+		<%= render "feeder/feeds/thumbnail", feed: feed %>
+	</article>
+<% end %>

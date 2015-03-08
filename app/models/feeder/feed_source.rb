@@ -11,12 +11,12 @@ module
     after_create :get_feed_entries
 
     def get_entries
-      xml = open( self.url ).read
-      new_feeds = FeedParser::Parser.parse( xml )
+      #urls = ["http://feeds.feedburner.com/FeldThoughts", "https://signalvnoise.com/posts.rss", "http://christinetsai.co/rss"]
+      new_feeds = url.map { |url| Feedjira::Feed.fetch_and_parse(self.url) }
       unless new_feeds.nil?
-        unless new_feeds.items.nil?
-          new_feeds.items.each do |item|
-            create_new_entry(item, self.id)
+        unless new_feeds.entries.nil?
+          new_feeds.entries.each do |entry|
+            create_new_entry(entry, self.id)
           end
           #update_feed_source_info(new_feeds)
         else
@@ -29,9 +29,9 @@ module
     end
 
   	def create_new_entry(e, fid)
-      unless Feed.exists?(['entry_id = ? AND feed_source_id = ?', e.item_id, fid])
+      unless Feed.exists?(['entry_id = ? AND feed_source_id = ?', e.entry_id, fid])
         new_feed = Feed.new(title: e.title, url: e.url, content: e.content, 
-                            entry_id: e.item_id, feed_source_id: fid)
+                            entry_id: e.entry_id, feed_source_id: fid)
         if new_feed.valid?
           new_feed.save!
         else
