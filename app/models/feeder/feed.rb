@@ -87,6 +87,10 @@ module Feeder
       !UserReadlater.where(user_id: user_id, feed_id: self.id).empty?
     end
 
+    def userreadlater(user_id)
+      UserReadlater.later_readings_of_user(user_id)
+    end
+
   private
     def decomposition_url
       links = []

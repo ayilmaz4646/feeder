@@ -3,7 +3,7 @@ require_dependency "feeder/application_controller"
 module Feeder
   class FeedsController < ApplicationController
 
-    before_action :set_feed, only: [:show, :edit, :like, :unlike, :destroy]
+    before_action :set_feed, only: [:show, :edit, :like, :unlike, :destroy, :userreadlater]
 
     def index
       @feeds = Feed.order(created_at: :desc, likes_count: :desc).page(params[:page]).per(8)
@@ -34,6 +34,10 @@ module Feeder
       	render :new
     	end
 		end
+
+    def userreadlater
+      @feeds = Feed.laterreadingsofuser(current_user.id)
+    end
 
     def like
       @feed.like(current_user.id)
