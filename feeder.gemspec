@@ -7,17 +7,17 @@ require "feeder/version"
 Gem::Specification.new do |s|
   s.name        = "feeder"
   s.version     = Feeder::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Feeder."
-  s.description = "TODO: Description of Feeder."
+  s.authors     = ["sitescamp"]
+  s.email       = ["ahmet.yilmaz@nimbo.com.tr"]
+  s.homepage    = "https://github.com/ayilmaz4646/feeder.git"
+  s.summary     = "Summary of Feeder."
+  s.description = "Description of Feeder."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.1.1"
+  s.add_dependency "rails", "4.2.0"
 
   s.add_development_dependency "sqlite3"
 end

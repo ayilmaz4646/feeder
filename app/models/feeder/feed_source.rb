@@ -12,7 +12,7 @@ module
 
     def get_entries
       #urls = ["http://feeds.feedburner.com/FeldThoughts", "https://signalvnoise.com/posts.rss", "http://christinetsai.co/rss"]
-      new_feeds = url.map { |url| Feedjira::Feed.fetch_and_parse(self.url) }
+      new_feeds = Feedjira::Feed.fetch_and_parse(self.url)
       unless new_feeds.nil?
         unless new_feeds.entries.nil?
           new_feeds.entries.each do |entry|
