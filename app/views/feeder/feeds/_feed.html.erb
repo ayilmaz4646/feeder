@@ -30,9 +30,19 @@
               <p><%= link_to "Read Later", readlater_feed_path(feed), remote: true %></p>
             <%end%>
           <%end%>
+
         </div>
-      </div>
-        <%= social_share_button_tag(@feed.title) %>
+        <!--img src="https://cloud.githubusercontent.com/assets/28847/3418917/8883ea2e-fe51-11e3-81f4-368f184b9a49.png" alt="" class="img-responsive"-->
+      </div>      
+      <div class="fb-share-button" data-href="#{feed.url}" data-layout="button_count"></div>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-text="sitescamp.com">Tweet</a>
+      <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+      <script type="IN/Share"></script>      
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+
+
+      
+        <%#= social_share_button_tag(@feed.title) %>
       <h5> Yazıda Geçen Linkler </h5>
       <ol>
         <% feed.sites.each do |site| %>
@@ -44,3 +54,14 @@
   </article>
 
 </div>
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

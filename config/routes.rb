@@ -11,9 +11,6 @@ Feeder::Engine.routes.draw do
 	resources :feeds do
 		get 'readlater', on: :member
 		get 'undo_readlater', on: :member
-		collection do
-    	get :userreadlater
-  	end
 	end
 	resources :sites
 

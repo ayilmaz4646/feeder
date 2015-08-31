@@ -6,7 +6,13 @@ module Feeder
     before_action :set_feed, only: [:show, :edit, :like, :unlike, :destroy, :userreadlater]
 
     def index
-      @feeds = Feed.order(created_at: :desc, likes_count: :desc).page(params[:page]).per(8)
+      @feeds = Feed.order(created_at: :desc, likes_count: :desc).page(params[:page]).per(10)
+      if params[:filter] == "readlater"
+        @feeds = Feed.joins(:user_readlaters).where("feeder_user_readlaters.user_id" => current_user.id).order(created_at: :desc)
+      end
+      if params[:filter] == "like"
+        @feeds = Feed.joins(:user_likes).where("feeder_user_likes.user_id" => current_user.id).order(created_at: :desc)
+      end
     end
 
     def new
@@ -36,7 +42,7 @@ module Feeder
 		end
 
     def userreadlater
-      @feeds = Feed.laterreadingsofuser(current_user.id)
+      @feeds = @user_readlater.feeds.where(user_id: current_user.id)      
     end
 
     def like

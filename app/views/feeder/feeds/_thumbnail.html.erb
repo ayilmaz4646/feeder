@@ -1,17 +1,17 @@
-		<div class="post-image">
-			<div class="img-thumbnail">
-				<%= image_tag(feed.image_url, class: "img-responsive") unless feed.image_url.blank? %>
-			</div>
-		</div>
-		<div class="post-content">
-			<%= link_to feed.title, feeder.feed_path(feed) %>
-		</div>
-		<div class="post-meta">
-			<% unless feed.published_at.blank? %>
-				<span><i class="fa fa-calendar"></i> <%= feed.published_at %> </span>
-			<% end %>
-			<% unless feed.author.blank? %>
-				<span><i class="fa fa-user"></i> <%= feed.author %> </span>
-			<% end %>
-			<!--span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span-->
-		</div>
+<div class="home-page-posts animated fadeIn ">
+	<article class="post">
+    <div class="post-preview col-xs-10  no-gutter">
+      <h3><%= link_to feed.title, feeder.feed_path(feed) %></h3>
+      <br><br>
+			<p class="meta">
+        <% unless feed.published_at.blank? %>
+					<span><i class="fa fa-calendar"></i> <%= feed.published_at %> </span>
+				<% end %>
+				<% unless feed.author.blank? %>
+					<span><i class="fa fa-user"></i> <%= feed.author %> </span>
+				<% end %>
+		  </p>
+    </div>
+	</article>
+</div>
+       

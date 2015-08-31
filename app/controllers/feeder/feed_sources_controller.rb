@@ -14,6 +14,10 @@ module Feeder
 
     def index
       @feed_sources = FeedSource.all
+
+      if params[:filter] == "user_sources"
+        @feed_sources = FeedSource.joins(:user_sources).where("feeder_user_sources.user_id" => current_user.id)
+      end
     end
 
     def edit

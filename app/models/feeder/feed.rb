@@ -4,6 +4,8 @@ module Feeder
   	belongs_to :feed_source
   	has_many   :sites_feeds, class_name: Feeder::SitesFeed
   	has_many   :sites, through: :sites_feeds
+    has_many   :user_readlaters
+    has_many   :user_likes
   	#has_and_belongs_to_many :sites, foreign_key: 'feed_id', class_name: Feeder::Site, association_foreign_key: 'site_id'
 
   	validates :title,    presence: true
@@ -87,8 +89,12 @@ module Feeder
       !UserReadlater.where(user_id: user_id, feed_id: self.id).empty?
     end
 
-    def userreadlater(user_id)
+    def user_readlater(user_id)
       UserReadlater.later_readings_of_user(user_id)
+    end
+
+    def user_like(user_id)
+      UserLike.likes_of_user(user_id)
     end
 
   private
