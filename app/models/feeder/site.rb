@@ -16,26 +16,29 @@ module Feeder
     def title_of_site_with_metainspector
       page = MetaInspector.new(self.domain)
       self.title = page.title
-      save
-    end
-
-    def description_of_site_with_metainspector
-      page = MetaInspector.new(self.domain)
       self.description = page.description
-      save
-    end
-
-    def keywords_of_site_with_metainspector
-      page = MetaInspector.new(self.domain)
       self.keywords = page.meta['keywords']
-      save
-    end
-
-    def icon_of_site_with_metainspector
-      page = MetaInspector.new(self.domain)
       self.image_url = page.images.favicon
       save
     end
+
+    # def description_of_site_with_metainspector
+    #   page = MetaInspector.new(self.domain)
+    #   self.description = page.description
+    #   save
+    # end
+
+    # def keywords_of_site_with_metainspector
+    #   page = MetaInspector.new(self.domain)
+    #   self.keywords = page.meta['keywords']
+    #   save
+    # end
+
+    # def icon_of_site_with_metainspector
+    #   page = MetaInspector.new(self.domain)
+    #   self.image_url = page.images.favicon
+    #   save
+    # end
 
 
 

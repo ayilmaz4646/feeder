@@ -9,10 +9,10 @@ module Feeder
   	#has_and_belongs_to_many :sites, foreign_key: 'feed_id', class_name: Feeder::Site, association_foreign_key: 'site_id'
 
   	validates :title,    presence: true
-  	validates :content,  presence:true
+  	#validates :content,  presence:true
   	validates :url,      presence: true
 
-  	after_create :analyze_feed
+  	after_create :analyze_feed, :send_emails
 
 		def analyze_feed
   		Resque.enqueue(FeedAnalyzerWorker, self.id)
@@ -95,6 +95,14 @@ module Feeder
 
     def user_like(user_id)
       UserLike.likes_of_user(user_id)
+    end
+
+    def self.user_feeds(user_id)
+
+    end
+
+    def send_emails
+      FeedMailer.daily_feeds.deliver_later!(wait: 10.seconds)
     end
 
   private

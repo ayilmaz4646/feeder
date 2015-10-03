@@ -30,8 +30,8 @@ module
 
   	def create_new_entry(e, fid)
       unless Feed.exists?(['entry_id = ? AND feed_source_id = ?', e.entry_id, fid])
-        new_feed = Feed.new(title: e.title, url: e.url, content: e.content, 
-                            entry_id: e.entry_id, feed_source_id: fid)
+        new_feed = Feed.new(title: e.title, url: e.url, content: (e.content||e.summary), 
+                            entry_id: e.entry_id, feed_source_id: fid, published_at: e.published, author: e.author)
         if new_feed.valid?
           new_feed.save!
         else
@@ -39,6 +39,12 @@ module
         end
       end
   	end
+
+    def domain_name_from_url
+      uri = URI.parse(URI.encode(url))
+      self.domain_name = Domainator.parse(uri)
+      save
+    end
 
     def follow(user_id)
       UserSource.find_or_create_by(user_id: user_id, feed_source_id: self.id)

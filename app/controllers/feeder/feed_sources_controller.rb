@@ -63,8 +63,18 @@ module Feeder
     def destroy
       @feed_source = FeedSource.find(params[:id])
       @feed_source.destroy
- 
-      redirect_to feed_source
+      
+      respond_to do |format|
+        format.html { redirect_to @feed_source }
+        format.json { head :ok }
+      end
+    end
+
+    def getentries
+      @feed_source = FeedSource.find(params[:id])
+      @feed_source.get_entries
+      @feeds = @feed_source.feeds.order(created_at: :desc).page(params[:page]).per(8)
+      render "show"
     end
 
     private

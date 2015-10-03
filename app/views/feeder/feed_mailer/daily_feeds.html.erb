@@ -1,0 +1,50 @@
+<table width="90%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center">
+			<div style="height: 30px; line-height: 30px; font-size: 10px;">&nbsp;</div>
+	 		<div style="line-height: 44px;">
+				<font face="Arial, Helvetica, sans-serif" size="5" color="#4db3a4" style="font-size: 17px;">
+					<span style="font-family: Arial, Helvetica, sans-serif; font-size: 17px; color: #4db3a4;">
+						Hi
+					</span>
+				</font>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<div style="line-height: 30px;">
+				<font face="Arial, Helvetica, sans-serif" size="5" color="#4db3a4" style="font-size: 17px;">
+					<span style="font-family: Arial, Helvetica, sans-serif; font-size: 17px; color: #4db3a4;">
+						The ticket <strong><%#= @ticket.reference %></strong>, is assigned to you. 
+					</span>
+				</font>
+			</div>
+			<div style="height: 35px; line-height: 35px; font-size: 10px;">&nbsp;</div>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<table width="80%" align="center" border="0" cellspacing="0" cellpadding="0">
+				<tr><td align="center">
+					<div style="line-height: 24px;">
+						<font face="Arial, Helvetica, sans-serif" size="4" color="#57697e" style="font-size: 16px;">
+						<span style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #57697e;">
+							<strong>Daily Feeds:</strong>
+								<br>
+									<% @feeds.each do |feed| %>
+										<p>
+											<%= @feed.title %>
+										</p>
+									<% end %>
+									<p>
+										<%#= link_to "Click to show", helpdesk.ticket_url(@ticket), style: "color:#439fe0;font-weight:bold;text-decoration:none;word-break:break-word" %>
+									</p>
+						</span></font>
+					</div>
+				</td></tr>
+			</table>
+			<div style="height: 45px; line-height: 45px; font-size: 10px;">&nbsp;</div>
+		</td>
+	</tr>
+</table>

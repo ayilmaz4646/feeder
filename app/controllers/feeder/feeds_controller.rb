@@ -69,6 +69,12 @@ module Feeder
     	@feed.destroy
 		end
 
+    def today_feed
+      @user = Nimbos::User.find(params[:user_id])
+      feed_sources_ids = Feeder::UserSource.where(user_id: @user.id).pluck(:feed_source_id)
+      @feeds = Feeder::Feed.where(feed_source_id: feed_sources_ids, published_at: Time.zone.yesterday)
+    end
+
     private
     def set_feed
       @feed = Feed.find(params[:id])
