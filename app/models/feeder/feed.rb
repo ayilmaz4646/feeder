@@ -12,7 +12,7 @@ module Feeder
   	#validates :content,  presence:true
   	validates :url,      presence: true
 
-  	after_create :analyze_feed, :send_emails
+  	after_create :analyze_feed#, :send_emails
 
 		def analyze_feed
   		Resque.enqueue(FeedAnalyzerWorker, self.id)
@@ -102,7 +102,10 @@ module Feeder
     end
 
     def send_emails
-      FeedMailer.daily_feeds.deliver_later!(wait: 10.seconds)
+      users = Nimbos::User.active
+      users.each do |user|
+        FeedMailer.daily_feeds(user.id).deliver_later!(wait: 10.seconds)
+      end
     end
 
   private

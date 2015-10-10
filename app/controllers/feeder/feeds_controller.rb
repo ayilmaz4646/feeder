@@ -13,6 +13,11 @@ module Feeder
       if params[:filter] == "like"
         @feeds = Feed.joins(:user_likes).where("feeder_user_likes.user_id" => current_user.id).order(created_at: :desc)
       end
+
+      #burayı sileceğiz
+      if params[:sendmail] == "yes"
+        FeedMailer.daily_feeds(current_user.id).deliver_later
+      end
     end
 
     def new
@@ -68,12 +73,6 @@ module Feeder
 		def destroy
     	@feed.destroy
 		end
-
-    def today_feed
-      @user = Nimbos::User.find(params[:user_id])
-      feed_sources_ids = Feeder::UserSource.where(user_id: @user.id).pluck(:feed_source_id)
-      @feeds = Feeder::Feed.where(feed_source_id: feed_sources_ids, published_at: Time.zone.yesterday)
-    end
 
     private
     def set_feed
