@@ -9,13 +9,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @site.each do |site| %>
+		<% @sites.each do |site| %>
 		  <tr>
 		  		<td><%= image_tag("#{site.image_url}", width: "16", height: "16", class: "img-responsive") %></td>
 		      <td><%= site.domain %></td>
 		      <td><%= site.title %></td>
 		      <td><%= link_to 'Show', site %></td>
-		      <td><%= link_to 'Edit', edit_site_path(site) %></td>
+		      <!--td><%#= link_to 'Edit', edit_site_path(site) %></td-->
 			</tr>
 		<% end %>
 	</tbody>

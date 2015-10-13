@@ -1,4 +1,0 @@
-ScheduleSendNotificationsJob:
-  queue: high
-  timeout: 0
-  every: 3m

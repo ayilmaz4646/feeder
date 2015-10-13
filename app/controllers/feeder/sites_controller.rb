@@ -4,12 +4,12 @@ module Feeder
   class SitesController < ApplicationController
 
     def index
-      @site = Site.all
+      @sites = Site.all
     end
 
-    def edit
-    	@site = Site.find(params[:id])
-    end
+    # def edit
+    # 	@site = Site.find(params[:id])
+    # end
 
     def show
     	@site = Site.find(params[:id])
