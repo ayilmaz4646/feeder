@@ -49,6 +49,9 @@ module Feeder
         if response.key?('publicationDate')
           self.published_at = Date.parse(response['publicationDate']['date'])
         end
+        if response.key?('text')
+          self.content = response['content']
+        end
         self.analyzed = true
         self.save
         # if response.key?('taxonomy')
@@ -62,6 +65,12 @@ module Feeder
         puts 'Error in combined call: ' + response['statusInfo']
       end      
     end
+
+    # def text_extraction_with_alchemyapi
+    #   AlchemyAPI::Config.output_mode = :json
+    #   new_content = AlchemyAPI::TextExtraction.new.search(url: self.url)
+    #   new_content
+    # end
 
     def like(user_id)
       UserLike.find_or_create_by(user_id: user_id, feed_id: self.id)
@@ -112,8 +121,9 @@ module Feeder
     def decomposition_url
       links = []
       content.scan(/href\s*=\s*\"*[^\">]*/i) do |link|
-        link = link.sub(/href="/i, "")
-        unless link.nil?
+        link = link.sub(/href="/i, "").to_s.strip
+
+        if valid_url?(link)
           link = link.downcase
           uri = URI.parse(URI.encode(link))
           link = Domainator.parse(uri)
@@ -122,5 +132,10 @@ module Feeder
       end
       links
     end
+
+    def valid_url?(url)
+      !url.nil? && !url.include?("localhost")
+    end
+
   end
 end

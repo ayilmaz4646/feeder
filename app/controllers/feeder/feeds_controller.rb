@@ -14,10 +14,7 @@ module Feeder
         @feeds = Feed.joins(:user_likes).where("feeder_user_likes.user_id" => current_user.id).order(created_at: :desc)
       end
 
-      #burayı sileceğiz
-      if params[:sendmail] == "yes"
-        FeedMailer.daily_feeds(current_user.id).deliver_later
-      end
+      #@new_content = @feed.text_extraction_with_alchemyapi
     end
 
     def new
@@ -28,7 +25,6 @@ module Feeder
     end
 
     def show
-      # @new_content = @feed.text_extraction_with_alchemyapi
       # @author = @feed.author_extraction_with_alchemyapi
       # @lang1  = @feed.language_detection_with_alchemyapi
       # @title  = @feed.title_extraction_with_alchemyapi

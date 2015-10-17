@@ -2,14 +2,15 @@ require_dependency "feeder/application_controller"
 
 module Feeder
   class SitesController < ApplicationController
+    before_action :require_login
 
     def index
       @sites = Site.all
     end
 
-    # def edit
-    # 	@site = Site.find(params[:id])
-    # end
+    def edit
+    	@site = Site.find(params[:id])
+    end
 
     def show
     	@site = Site.find(params[:id])

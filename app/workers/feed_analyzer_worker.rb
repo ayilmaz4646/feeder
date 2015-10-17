@@ -7,6 +7,7 @@ class FeedAnalyzerWorker
     feed = Feeder::Feed.find(id)
     feed.set_relation_to_sites
     feed.alchemy_get_combined_data
+    #feed.text_extraction_with_alchemyapi
   end
 
 end
