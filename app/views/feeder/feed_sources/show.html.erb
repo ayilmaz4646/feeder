@@ -1,18 +1,22 @@
 <div class="row">
-<%= render partial: "header" %>
- <div id="follow_buttons" class= "row" >
-    <% if current_user %>
-      <% if @feed_source.followed_by?(current_user.id) %>
-        <%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), remote: true %>  
-      <% else %>
-        <%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>  
-      <%end%>
-    <%end%>
-  </div>
-</div>
+  <section class="col-md-8 col-sm-12 col-md-offset-5 main-content">
+    <div class="home-page-posts animated fadeIn ">
+      <%= render partial: "header" %>
+       <div id="follow_buttons" class= "row" >
+          <% if current_user %>
+            <% if @feed_source.followed_by?(current_user.id) %>
+              <%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), remote: true %>  
+            <% else %>
+              <%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>  
+            <%end%>
+          <%end%>
+        </div>
+      </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <%= render "feeder/feeds/list", feeds: @feeds %>
-  </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= render "feeder/feeds/list", feeds: @feeds %>
+        </div>
+      </div>
+  </section>
 </div>
