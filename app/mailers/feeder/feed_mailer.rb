@@ -1,6 +1,6 @@
 module Feeder
   class FeedMailer < ActionMailer::Base
-  	default from: "hello@sitescamp.com"
+  	default :from => %{"Sitescamp" <hello@sitescamp.com>}
 
   	layout 'mailer'
 

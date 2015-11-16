@@ -49,9 +49,6 @@ module Feeder
         if response.key?('publicationDate')
           self.published_at = Date.parse(response['publicationDate']['date'])
         end
-        if response.key?('text')
-          self.content = response['content']
-        end
         self.analyzed = true
         self.save
         # if response.key?('taxonomy')

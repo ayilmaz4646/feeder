@@ -1,16 +1,18 @@
-<div class="row">
-  <h3><%= link_to feed.title, feeder.feed_path(feed) %></h3><br><br>
-  <p class="body">
-	  <% unless feed.content.blank? %>
-			<span></i> <%= truncate(feed.content, length: 280) %> </span>
-		<% end %>
-	</p>
-	<p class="meta">
-  	<% unless feed.published_at.blank? %>
-			<span><i class="fa fa-calendar"></i> <%= feed.published_at %> </span>
-		<% end %>
-		<% unless feed.author.blank? %>
-			<span><i class="fa fa-user"></i> <%= feed.author %> </span>
-	  <% end %>
-  </p>
-</div>
+<article class="post">
+  <div class="post-preview col-xs-10  no-gutter">
+		  <h2><%= link_to feed.title, feeder.feed_path(feed) %></h2><br><br>
+		  <p class="body">
+			  <% unless feed.content.blank? %>
+					<span></i> <%= truncate(sanitize(feed.content, :tags => %w(br <a href)), :length => 200) %> </span>
+				<% end %>
+			</p>
+			<p class="meta">
+		  	<% unless feed.published_at.blank? %>
+					<span><i class="fa fa-calendar"></i> <%= feed.published_at %> </span>
+				<% end %>
+				<% unless feed.author.blank? %>
+					<span><i class="fa fa-user"></i> <%= feed.author %> </span>
+			  <% end %>
+		  </p>
+	</div>
+</article>
