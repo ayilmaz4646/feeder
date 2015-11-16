@@ -13,6 +13,7 @@
 				<% unless feed.author.blank? %>
 					<span><i class="fa fa-user"></i> <%= feed.author %> </span>
 			  <% end %>
+					<span><i class="fa fa-rss"></i> <%= feed.feed_source.title %> </span>
 		  </p>
 	</div>
 </article>

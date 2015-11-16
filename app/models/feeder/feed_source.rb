@@ -9,7 +9,7 @@ module
   	#validates :title, presence: true
   	validates :url,   presence: true, uniqueness: true
 
-    after_create :get_feed_entries
+    after_create :get_feed_entries, :domain_name_from_url
 
     def get_entries
       new_feeds = Feedjira::Feed.fetch_and_parse(self.url)
@@ -41,8 +41,10 @@ module
   	end
 
     def domain_name_from_url
-      uri = URI.parse(URI.encode(url))
+      uri = URI.parse(URI.encode(self.url))
       self.domain_name = Domainator.parse(uri)
+      #if feedburner kontrolü
+      self.title = self.domain_name.split('.').first.upcase + " BLOG"
       save
     end
 
