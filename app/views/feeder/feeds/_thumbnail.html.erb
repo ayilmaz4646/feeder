@@ -1,9 +1,9 @@
 <article class="post">
-  <div class="post-preview col-xs-10  no-gutter">
+  <div class="post-preview col-xs-10  no-gutter" id="feeds_list_div">
 		  <h2><%= link_to feed.title, feeder.feed_path(feed) %></h2><br><br>
 		  <p class="body">
 			  <% unless feed.content.blank? %>
-					<span></i> <%= truncate(sanitize(feed.content, :tags => %w(br <a href)), :length => 200) %> </span>
+					<span></i> <%= truncate(sanitize(feed.content, :tags => %w(br <a href <br>)), :length => 200, :separator => ' ') %> </span>
 				<% end %>
 			</p>
 			<p class="meta">

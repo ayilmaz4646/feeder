@@ -1,0 +1,26 @@
+<div id="feed_sources_list_div">
+  <% objects.each do |feed_source| %>
+    <form>
+      <div class="form-group">
+        <label><%= feed_source.title %></label>
+        <label class="form-control" style="width: 600px;">
+          <%= link_to feed_source.url, feed_source %>
+          <div id="follow_buttons" class= "follow-buttons" >
+            <% if current_user %>
+              <% if feed_source.followed_by?(current_user.id) %>
+                <%= link_to 'Unfollow', unfollow_feed_source_path(feed_source), remote: true %>  
+              <% else %>
+                <%= link_to 'Follow', follow_feed_source_path(feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>  
+              <%end%>
+            <%end%>
+          </div> 
+        </label>
+      </div>
+    </form>
+  <% end %>
+  <% if objects.respond_to? :current_page %>
+  <ul class="pagination">
+    <%= paginate objects %>
+  </ul>
+<% end %>
+</div>

@@ -1,6 +1,9 @@
-
-	  <%= render "feeder/feeds/box", feeds: feeds %>
-
-	  <% if feeds.respond_to? :current_page %>
-		  <button type="button" class="btn btn-default btn-lg btn-block"><%= link_to_next_page feeds, 'Load More', remote: true, id: "load_more_link" %></button>
-		<% end %>
+<%= render "feeder/feeds/box", feeds: feeds %>
+<% if @feeds.respond_to? :current_page %>
+  <ul class="pagination">
+    <%= paginate @feeds %>
+  </ul>
+<% end %>
+<!--<%# if feeds.respond_to? :current_page %>
+ <button type="button" class="btn btn-default btn-lg btn-block"><%#= link_to_next_page feeds, 'Load More', remote: true, id: "load_more_link" %></button>
+<%# end %>-->

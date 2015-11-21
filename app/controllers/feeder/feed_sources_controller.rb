@@ -13,7 +13,7 @@ module Feeder
     end
 
     def index
-      @feed_sources = FeedSource.all
+      @feed_sources = FeedSource.all.page(params[:page]).per(10)
 
       if params[:filter] == "user_sources"
         @feed_sources = FeedSource.joins(:user_sources).where("feeder_user_sources.user_id" => current_user.id)

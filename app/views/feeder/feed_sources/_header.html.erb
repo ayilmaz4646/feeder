@@ -1,15 +1,5 @@
 <div id="lead_#{site.id}_profile_header" class="">
-  <div class="col-md-1">
-    <i class="fa fa-sitemap fa-5x"></i>
-  </div>
-  <div class="col-md-11">
-    <div class="profile-info">
-      <div class="row">
-        <h3><%= @feed_source.title %></h3>
-        <h4><%= @feed_source.url %></h4>
-        <h5><%= @feed_source.domain_name %></h5>
-       </div>
-    </div>
-    <hr>
-  </div>
+  <h3><i class="fa fa-sitemap"></i> <%= @feed_source.title %></h3>
+  <h4><%= @feed_source.url %></h4>
+  <h5><%= @feed_source.domain_name %></h5>
 </div>

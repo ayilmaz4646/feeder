@@ -2,12 +2,12 @@
   <section class="col-md-8 col-sm-12 col-md-offset-5 main-content">
     <div class="home-page-posts animated fadeIn ">
       <%= render partial: "header" %>
-       <div id="follow_buttons" class= "row" >
+       <div id="follow_buttons" >
           <% if current_user %>
             <% if @feed_source.followed_by?(current_user.id) %>
-              <%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), remote: true %>  
+              <%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), remote: true, class: "btn btn-default" %>  
             <% else %>
-              <%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, id: "feed_source_id", "data-posref" => @user_source %>  
+              <%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, class: "btn btn-default", id: "feed_source_id", "data-posref" => @user_source %>  
             <%end%>
           <%end%>
         </div>
