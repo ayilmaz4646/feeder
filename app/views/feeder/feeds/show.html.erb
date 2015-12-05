@@ -1,3 +1,24 @@
+<% content_for :sidebar_action do %>
+  <div id="like_buttons" class="col-md-6 pull-right">
+    <% if current_user %>
+      <% if @feed.liked_by?(current_user.id) %>
+        <p><%= link_to "Unlike(#{@feed.likes_count})", unlike_feed_path(@feed), remote: true, class: "btn btn-danger" %></p>
+      <% else %>
+        <p><%= link_to "Like(#{@feed.likes_count})", like_feed_path(@feed), remote: true, class: "btn btn-primary" %></p>  
+      <%end%>
+    <%end%>
+  </div>
+  <div id="readlater_buttons" class="col-md-6 pull-right">
+    <% if current_user %>
+      <% if @feed.readlater_by?(current_user.id) %>
+        <p><%= link_to "Undo Read Later", undo_readlater_feed_path(@feed), remote: true, class: "btn btn-danger" %></p>
+      <% else %>
+        <p><%= link_to "Read Later", readlater_feed_path(@feed), remote: true, class: "btn btn-primary" %></p>
+      <%end%>
+    <%end%>
+  </div>
+<% end %>
+
 <div class="row">
   <section class="col-md-8 col-sm-12 col-md-offset-5 main-content">
     <div class="home-page-posts animated fadeIn ">

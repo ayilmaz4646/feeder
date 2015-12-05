@@ -1,1 +1,1 @@
-$("#like_buttons").html('<%= j link_to "Unlike#{@feed.likes_count}", feeder.unlike_feed_path(@feed), remote: true, class: "btn btn-default" %>');
+$("#like_buttons").html('<%= j link_to "Unlike#{@feed.likes_count}", feeder.unlike_feed_path(@feed), remote: true, class: "btn btn-danger pull-right" %>');

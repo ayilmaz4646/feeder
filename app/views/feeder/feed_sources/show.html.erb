@@ -1,22 +1,30 @@
+<% content_for :sidebar_action do %>
+  <div id="follow_buttons" >
+    <% if current_user %>
+      <% if @feed_source.followed_by?(current_user.id) %>
+        <%= link_to unfollow_feed_source_path(@feed_source), remote: true, class: "btn btn-danger pull-right" do %>
+          <i class="fa fa-plus"></i> Unfollow
+        <%end%>
+      <% else %>
+        <%= link_to follow_feed_source_path(@feed_source), remote: true, class: "btn btn-primary pull-right", id: "feed_source_id", "data-posref" => @user_source do %> 
+          <i class="fa fa-plus"></i> Follow
+        <%end%> 
+      <%end%>
+    <%end%>
+  </div>
+<% end %>
+
+
 <div class="row">
   <section class="col-md-8 col-sm-12 col-md-offset-5 main-content">
     <div class="home-page-posts animated fadeIn ">
       <%= render partial: "header" %>
-       <div id="follow_buttons" >
-          <% if current_user %>
-            <% if @feed_source.followed_by?(current_user.id) %>
-              <%= link_to 'Unfollow', unfollow_feed_source_path(@feed_source), remote: true, class: "btn btn-default" %>  
-            <% else %>
-              <%= link_to 'Follow', follow_feed_source_path(@feed_source), remote: true, class: "btn btn-default", id: "feed_source_id", "data-posref" => @user_source %>  
-            <%end%>
-          <%end%>
-        </div>
-      </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <%= render "feeder/feeds/list", feeds: @feeds %>
-        </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= render "feeder/feeds/list", feeds: @feeds %>
       </div>
+    </div>
   </section>
 </div>

@@ -1,1 +1,1 @@
-$("#like_buttons").html('<%= j link_to "Like#{@feed.likes_count}", feeder.like_feed_path(@feed), remote: true, class: "btn btn-default" %>');
+$("#like_buttons").html('<%= j link_to "Like#{@feed.likes_count}", feeder.like_feed_path(@feed), remote: true, class: "btn btn-primary pull-right" %>');

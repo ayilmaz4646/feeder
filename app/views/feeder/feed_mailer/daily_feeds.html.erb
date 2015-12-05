@@ -33,6 +33,7 @@
 									<% @feeds.each do |feed| %>
 										<li>
 											<%= link_to feed.title, feeder.feed_url(feed), style: "color:#439fe0;font-weight:bold;text-decoration:none;word-break:break-word" %>
+											/ <%= feed.feed_source.title %> / <%= feed.author %>
 										</li>
 									<% end %>
 						</span></font>
