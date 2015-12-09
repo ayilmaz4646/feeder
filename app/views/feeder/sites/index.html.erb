@@ -1,22 +1,8 @@
-<table>
-	<thead>
-		<tr>
-			<th></th>
-			<th>Domain</th>
-			<th>Title</th>
-			<th></th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @sites.each do |site| %>
-		  <tr>
-		  		<td><%= image_tag("#{site.image_url}", width: "16", height: "16", class: "img-responsive") %></td>
-		      <td><%= site.domain %></td>
-		      <td><%= site.title %></td>
-		      <td><%= link_to 'Show', site %></td>
-		      <!--td><%#= link_to 'Edit', edit_site_path(site) %></td-->
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<div class="row">
+  <section class="col-md-8 col-sm-12 col-md-offset-5 main-content">
+    <div class="home-page-sites animated fadeIn ">
+        <h1><i class="fa fa-list"></i> Sites</h1>
+        <%= render "feeder/sites/list", objects: @sites %><br>
+    </div>
+  </section>
+</div>

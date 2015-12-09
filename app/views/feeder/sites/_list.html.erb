@@ -1,0 +1,19 @@
+<div id="sites_list_div">
+  <% objects.each do |site| %>
+    <form>
+      <div class="form-group">
+        <label class="form-control" style="width: 600px;"><%#= image_tag("#{site.image_url}", width: "16", height: "16", class: "img-responsive") %><%= site.domain %>
+          <%#= site.title %>
+          <div id="follow_buttons" class= "follow-buttons" >
+            <%= link_to 'Show', site %>
+          </div> 
+        </label>
+      </div>
+    </form>
+  <% end %>
+  <% if objects.respond_to? :current_page %>
+  <ul class="pagination">
+    <%= paginate objects %>
+  </ul>
+<% end %>
+</div>

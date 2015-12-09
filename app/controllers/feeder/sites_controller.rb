@@ -5,7 +5,7 @@ module Feeder
     before_action :require_login
 
     def index
-      @sites = Site.all
+      @sites = Site.all.page(params[:page]).per(20)
     end
 
     def edit
