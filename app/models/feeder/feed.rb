@@ -47,7 +47,11 @@ module Feeder
           self.language = response['language']
         end
         if response.key?('publicationDate')
-          self.published_at = Date.parse(response['publicationDate']['date'])
+          begin
+            self.published_at = Date.parse(response['publicationDate']['date'])
+          rescue ArgumentError
+            self.published_at = Date.today
+          end
         end
         self.analyzed = true
         self.save
