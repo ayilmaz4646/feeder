@@ -15,7 +15,9 @@ module Feeder
   	after_create :analyze_feed#, :send_emails
 
 		def analyze_feed
-  		Resque.enqueue(FeedAnalyzerWorker, self.id)
+  		#Resque.enqueue(FeedAnalyzerWorker, self.id)
+      #Sidekiq::Client.enqueue(FeedAnalyzerWorker, self.id)
+      FeedAnalyzerWorker.perform_async(self.id)
   	end
 
   	def set_relation_to_sites

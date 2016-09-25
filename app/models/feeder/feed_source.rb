@@ -62,7 +62,9 @@ module
     end
 
     def get_feed_entries
-      Resque.enqueue(FeedCheckerWorker, self.id)
+      #Resque.enqueue(FeedCheckerWorker, self.id)
+      FeedCheckerWorker.perform_async(self.id)
+      #Sidekiq::Client.enqueue(FeedCheckerWorker, self.id)
     end
 
   private

@@ -1,12 +1,11 @@
 class FeedCheckerWorker
-	
-  @queue = :feed_queue
+	include Sidekiq::Worker
 
-  def self.perform(id)
+  #sidekiq_options queue: "feed_queue"
 
+  def perform(id)
     feed_source = Feeder::FeedSource.find(id)
     feed_source.get_entries
-
   end
 
 end

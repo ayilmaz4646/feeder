@@ -10,7 +10,8 @@ module Feeder
     after_create :analyze_site
 
     def analyze_site
-      Resque.enqueue(SiteAnalyzerWorker, self.id)
+      #Resque.enqueue(SiteAnalyzerWorker, self.id)
+      SiteAnalyzerWorker.perform_async(self.id)
     end
 
     def title_of_site_with_metainspector

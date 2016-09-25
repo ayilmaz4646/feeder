@@ -13,7 +13,9 @@ module Feeder
       if params[:filter] == "like"
         @feeds = Feed.joins(:user_likes).where("feeder_user_likes.user_id" => current_user.id).order(created_at: :desc)
       end
-
+      if params[:sendmail].present?
+        SendDailyFeedsWorker.perform_async
+      end
       #@new_content = @feed.text_extraction_with_alchemyapi
     end
 

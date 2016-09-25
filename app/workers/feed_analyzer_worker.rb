@@ -1,9 +1,9 @@
 class FeedAnalyzerWorker
+	include Sidekiq::Worker
 
-	@queue = :feed_queue
+	#sidekiq_options queue: "feed_queue"
 
-  def self.perform(id)
-
+  def perform(id)
     feed = Feeder::Feed.find(id)
     feed.set_relation_to_sites
     feed.alchemy_get_combined_data

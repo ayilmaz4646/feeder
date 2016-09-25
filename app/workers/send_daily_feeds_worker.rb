@@ -1,12 +1,12 @@
 class SendDailyFeedsWorker
+	include Sidekiq::Worker
 
-	@queue = :daily_queue
+	#sidekiq_options queue: "daily_queue"
 
-  def self.perform
-
+  def perform
     users = Nimbos::User.active
     users.each do |user|
-    	Feeder::FeedMailer.daily_feeds(user.id).deliver_later
+    	Feeder::FeedMailer.daily_feeds(user.id).deliver
     end
   end
 
